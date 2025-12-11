@@ -77,14 +77,14 @@
   <!-- STEP 0: Intro -->
   <div class="cpm-step" data-step="0">
     <p>
-      This tool maps your answers onto a simple two-axis chart, based on two big instincts in Christian theology:
+      This tool maps your answers onto a simple two-axis chart, based on two big instincts in Christian thought:
     </p>
     <ul>
-      <li><strong>Authority &amp; Continuity (X-axis)</strong> – how much weight you give to Scripture alone versus Scripture within the Church’s ongoing teaching.</li>
-      <li><strong>Grace &amp; Participation (Y-axis)</strong> – how you understand faith, works, sacraments, and human cooperation with grace.</li>
+      <li><strong>Authority &amp; Continuity (X-axis)</strong> – how much you lean toward “Bible alone” versus “Bible within the long memory of the Church”.</li>
+      <li><strong>Grace &amp; Participation (Y-axis)</strong> – how you think God’s grace and human response fit together over a lifetime.</li>
     </ul>
     <p>
-      Different Christians read the same passages with different emphases. This doesn’t judge who is right; it simply shows where your own interpretive posture tends to sit.
+      Different Christians read the same passages with different emphases. This doesn’t judge who is right; it just shows where your own instincts tend to sit.
     </p>
     <p class="cpm-helper">
       This prototype has four questions. Later it can be expanded.
@@ -94,26 +94,36 @@
 
   <!-- STEP 1: Tradition / Scripture -->
   <div class="cpm-step" data-step="1" style="display:none;">
-    <h2>1. Apostolic Tradition</h2>
-    <p><em>“So then, brothers and sisters, stand firm and hold to the traditions that you were taught by us, either by word of mouth or by letter.”</em> (2 Thessalonians 2:15)</p>
-    <p>How do you read this?</p>
+    <h2>1. Bible and the Church’s memory</h2>
+    <p>
+      Over time, churches don’t just read the Bible; they also build habits, summaries, and ways of reading that get handed on.
+      When there’s a tension between “what the Bible says” and “what churches have always taught”, where do you naturally land?
+    </p>
 
     <label class="cpm-option">
       <input type="radio" name="q1" data-dx="-3" data-dy="0">
-      The “traditions” were temporary; now everything binding is in Scripture alone.
+      In the end, only the Bible is binding. Later church teaching is human and can be ignored if it seems wrong.
     </label>
     <label class="cpm-option">
       <input type="radio" name="q1" data-dx="-1" data-dy="0">
-      It acknowledged oral teaching then, but today in practice Scripture is sufficient by itself.
+      Church tradition can be useful background, but practically the Bible by itself is enough to decide things.
     </label>
     <label class="cpm-option">
       <input type="radio" name="q1" data-dx="2" data-dy="0">
-      It shows a pattern: Scripture is primary, but the Church’s received teaching still matters.
+      The Bible is primary, but the Church’s long memory and teaching help guard how we read it.
     </label>
     <label class="cpm-option">
       <input type="radio" name="q1" data-dx="3" data-dy="0">
-      It supports an ongoing authoritative tradition alongside Scripture.
+      Christian belief is not just “Bible and me”, but also the living tradition passed on in and through the Church.
     </label>
+
+    <p class="cpm-helper"><strong>Readings</strong></p>
+    <ul class="cpm-helper">
+      <li><strong>2 Thessalonians 2:15</strong> – “Stand firm and hold to the traditions that you were taught by us, either by word of mouth or by letter.”</li>
+      <li><strong>1 Corinthians 11:2</strong> – “You maintain the traditions just as I handed them on to you.”</li>
+      <li><strong>2 Timothy 1:13–14</strong> – “Hold to the standard of sound teaching you have heard from me… guard the good treasure entrusted to you.”</li>
+      <li><strong>Acts 2:42</strong> – “They devoted themselves to the apostles’ teaching and fellowship…”</li>
+    </ul>
 
     <div class="cpm-nav">
       <button type="button" onclick="cpmPrevStep()" class="cpm-btn cpm-btn-secondary">Back</button>
@@ -123,27 +133,36 @@
 
   <!-- STEP 2: Faith & Works -->
   <div class="cpm-step" data-step="2" style="display:none;">
-    <h2>2. Faith and Works</h2>
-    <p><em>“For we hold that a person is justified by faith apart from works of the law.”</em> (Romans 3:28)</p>
-    <p><em>“You see that a person is justified by works and not by faith alone.”</em> (James 2:24)</p>
-    <p>Holding these together, which statement fits you best?</p>
+    <h2>2. Trust and life-change</h2>
+    <p>
+      The New Testament says that we are made right with God through faith, and also that faith without works is dead.
+      When you put these together, what sounds closest to your instinct?
+    </p>
 
     <label class="cpm-option">
       <input type="radio" name="q2" data-dx="0" data-dy="3">
-      We are justified by faith alone; works only prove faith is real and play no role in justification.
+      Trusting in Christ alone is what makes a person right with God. Good actions only show that this trust is real; they don’t play any role in being accepted.
     </label>
     <label class="cpm-option">
       <input type="radio" name="q2" data-dx="0" data-dy="1">
-      Faith alone justifies, but real faith inevitably produces a life of obedience.
+      God accepts us because of trust in Christ, but real trust always leads to a changed way of living if there’s time and opportunity.
     </label>
     <label class="cpm-option">
       <input type="radio" name="q2" data-dx="0" data-dy="-1">
-      Faith and obedience belong together; justification language is more complex than a slogan.
+      Trust and obedience belong together. It’s hard to draw a sharp line between “faith” and “what we then do with our lives”.
     </label>
     <label class="cpm-option">
       <input type="radio" name="q2" data-dx="0" data-dy="-3">
-      Salvation is a cooperative process: faith, works, and sacraments all participate in grace.
+      Being saved is an ongoing relationship where God and the person keep working together through trust, choices, habits, and the life of the Church.
     </label>
+
+    <p class="cpm-helper"><strong>Readings</strong></p>
+    <ul class="cpm-helper">
+      <li><strong>Romans 3:28</strong> – “We hold that a person is justified by faith apart from works of the law.”</li>
+      <li><strong>Galatians 2:16</strong> – “A person is justified not by the works of the law but through faith in Jesus Christ.”</li>
+      <li><strong>James 2:24</strong> – “You see that a person is justified by works and not by faith alone.”</li>
+      <li><strong>Ephesians 2:8–10</strong> – “By grace you have been saved through faith… created in Christ Jesus for good works…”</li>
+    </ul>
 
     <div class="cpm-nav">
       <button type="button" onclick="cpmPrevStep()" class="cpm-btn cpm-btn-secondary">Back</button>
@@ -153,27 +172,36 @@
 
   <!-- STEP 3: Baptism -->
   <div class="cpm-step" data-step="3" style="display:none;">
-    <h2>3. Baptism</h2>
-    <p><em>“Repent and be baptised every one of you in the name of Jesus Christ for the forgiveness of your sins…”</em> (Acts 2:38)</p>
-    <p><em>“Baptism… now saves you…”</em> (1 Peter 3:21)</p>
-    <p>What do you think baptism does?</p>
+    <h2>3. What do you think baptism does?</h2>
+    <p>
+      Some Christians see baptism mainly as a public declaration; others see it as a moment where God actually does something deep and invisible.
+      Which description feels most like your instinct?
+    </p>
 
     <label class="cpm-option">
       <input type="radio" name="q3" data-dx="-1" data-dy="3">
-      A public symbol of a salvation that has already happened by faith alone.
+      It’s a public symbol showing that someone has already been saved by trusting in Christ. God has done the real work before the water.
     </label>
     <label class="cpm-option">
       <input type="radio" name="q3" data-dx="1" data-dy="1">
-      A commanded sign marking entry into the visible Church; God saves independently of it.
+      It’s the official doorway into the visible Christian community. God can save people with or without it, but it’s an important act of obedience.
     </label>
     <label class="cpm-option">
       <input type="radio" name="q3" data-dx="2" data-dy="-1">
-      A normal means by which God gives or seals grace, even if God is not boxed in by it.
+      It is one of the normal ways God gives or seals grace, even if God is not limited to that moment alone.
     </label>
     <label class="cpm-option">
       <input type="radio" name="q3" data-dx="3" data-dy="-3">
-      A true sacrament: God actually works salvationally through it when the Church baptises.
+      It is a real sacrament: when the Church baptises, God truly acts in that moment for forgiveness and new life.
     </label>
+
+    <p class="cpm-helper"><strong>Readings</strong></p>
+    <ul class="cpm-helper">
+      <li><strong>Acts 2:38</strong> – “Repent and be baptised… for the forgiveness of your sins…”</li>
+      <li><strong>Romans 6:3–4</strong> – “All of us who have been baptised into Christ Jesus were baptised into his death…”</li>
+      <li><strong>1 Peter 3:21</strong> – “Baptism… now saves you… as an appeal to God for a good conscience…”</li>
+      <li><strong>John 3:5</strong> – “No one can enter the kingdom of God without being born of water and Spirit.”</li>
+    </ul>
 
     <div class="cpm-nav">
       <button type="button" onclick="cpmPrevStep()" class="cpm-btn cpm-btn-secondary">Back</button>
@@ -183,26 +211,36 @@
 
   <!-- STEP 4: Eucharist -->
   <div class="cpm-step" data-step="4" style="display:none;">
-    <h2>4. Communion / The Lord’s Supper</h2>
-    <p><em>“This is my body… this is my blood…”</em> (Matthew 26:26–28)</p>
-    <p>What is happening at Communion?</p>
+    <h2>4. What do you think is happening at Communion?</h2>
+    <p>
+      When Christians share bread and wine (or juice), traditions differ on how “real” Christ’s presence is in that act.
+      Which statement sounds most like you?
+    </p>
 
     <label class="cpm-option">
       <input type="radio" name="q4" data-dx="-2" data-dy="2">
-      A symbolic memorial only; Christ is present in our faith and memory, not in the elements.
+      It is a symbolic memorial. Christ is present in our hearts and memory, not in the bread and wine themselves.
     </label>
     <label class="cpm-option">
       <input type="radio" name="q4" data-dx="1" data-dy="0">
-      Christ is really present spiritually; the Supper strengthens faith but doesn’t itself convey grace.
+      Christ is really present spiritually to those who receive in faith. The meal strengthens trust but doesn’t itself give grace.
     </label>
     <label class="cpm-option">
       <input type="radio" name="q4" data-dx="2" data-dy="-1">
-      Christ is really present in a way we don’t fully define; the Eucharist is a key means of grace.
+      Christ is really present in a mysterious way we don’t fully define, and the Eucharist is one of the main ways God feeds us with grace.
     </label>
     <label class="cpm-option">
       <input type="radio" name="q4" data-dx="3" data-dy="-2">
-      The bread and wine truly become Christ’s body and blood; the Eucharist is central to salvation life.
+      The bread and wine truly become Christ’s body and blood, and sharing in them is central to the Christian life.
     </label>
+
+    <p class="cpm-helper"><strong>Readings</strong></p>
+    <ul class="cpm-helper">
+      <li><strong>Matthew 26:26–28</strong> – “This is my body… this is my blood…”</li>
+      <li><strong>1 Corinthians 10:16</strong> – “The cup of blessing that we bless, is it not a sharing in the blood of Christ?”</li>
+      <li><strong>1 Corinthians 11:23–26</strong> – “Do this in remembrance of me…”</li>
+      <li><strong>John 6:53–56</strong> – “Unless you eat the flesh of the Son of Man and drink his blood, you have no life in you.”</li>
+    </ul>
 
     <div class="cpm-nav">
       <button type="button" onclick="cpmPrevStep()" class="cpm-btn cpm-btn-secondary">Back</button>
@@ -228,7 +266,7 @@
 
     <p class="cpm-helper">
       X-axis: Authority &amp; Continuity (left = Scripture-alone emphasis, right = Scripture-within-tradition).<br>
-      Y-axis: Grace &amp; Participation (up = faith-alone abstraction, down = cooperative / sacramental grace).
+      Y-axis: Grace &amp; Participation (up = faith-alone style language, down = cooperative / sacramental grace).
     </p>
 
     <button type="button" onclick="cpmRestart()" class="cpm-btn cpm-btn-secondary">Start Again</button>
@@ -268,6 +306,70 @@
     'Catholic / Orthodox':      'rgba(153, 102, 255, 0.9)'       // purple
   };
 
+  // Point shapes per tradition
+  const CPM_POINT_STYLES = {
+    'Baptist (typical)': 'triangle',
+    'Non-denominational Evangelical': 'rect',
+    'Reformed / Presbyterian': 'rectRot',
+    'Pentecostal / Charismatic': 'star',
+    'Lutheran (confessional)': 'circle',
+    'Methodist / Wesleyan': 'cross',
+    'Anglican – Evangelical': 'triangle',
+    'Anglican – Broad': 'rectRounded',
+    'Anglican – Anglo-Catholic': 'crossRot',
+    'Catholic – Typical Parish': 'circle',
+    'Catholic – Traditionalist': 'star',
+    'Catholic – Progressive': 'rectRot',
+    'Eastern Orthodox': 'dash'
+  };
+
+  // Short labels drawn next to each point
+  const CPM_LABEL_ABBREVIATIONS = {
+    'Baptist (typical)': 'Bap',
+    'Non-denominational Evangelical': 'NDE',
+    'Reformed / Presbyterian': 'Ref',
+    'Pentecostal / Charismatic': 'Pent',
+    'Lutheran (confessional)': 'Luth',
+    'Methodist / Wesleyan': 'Meth',
+    'Anglican – Evangelical': 'AE',
+    'Anglican – Broad': 'AB',
+    'Anglican – Anglo-Catholic': 'AC',
+    'Catholic – Typical Parish': 'CT',
+    'Catholic – Traditionalist': 'CTM',
+    'Catholic – Progressive': 'CP',
+    'Eastern Orthodox': 'EO'
+  };
+
+  // Plugin to draw tiny text labels above each reference point
+  const cpmLabelPlugin = {
+    id: 'cpmLabelPlugin',
+    afterDatasetsDraw(chart, args, pluginOptions) {
+      const { ctx } = chart;
+      chart.data.datasets.forEach((dataset, datasetIndex) => {
+        if (dataset.label === 'You') return;
+        const meta = chart.getDatasetMeta(datasetIndex);
+        if (!meta || meta.hidden) return;
+
+        meta.data.forEach((element) => {
+          const pos = element.tooltipPosition();
+          const label = CPM_LABEL_ABBREVIATIONS[dataset.label];
+          if (!label) return;
+          ctx.save();
+          ctx.font = '10px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI"';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'bottom';
+          ctx.fillStyle = '#444';
+          ctx.fillText(label, pos.x, pos.y - 4);
+          ctx.restore();
+        });
+      });
+    }
+  };
+
+  if (typeof Chart !== 'undefined') {
+    Chart.register(cpmLabelPlugin);
+  }
+
   function cpmShowStep(step) {
     const steps = document.querySelectorAll('#cpm-app .cpm-step');
     steps.forEach(s => s.style.display = 'none');
@@ -275,6 +377,14 @@
     if (target) {
       target.style.display = 'block';
       cpmCurrentStep = step;
+    }
+
+    const progressEl = document.getElementById('cpm-progress');
+    if (!progressEl) return;
+    if (step >= 1 && step <= 4) {
+      progressEl.textContent = 'Question ' + step + ' of 4';
+    } else {
+      progressEl.textContent = '';
     }
   }
 
@@ -322,6 +432,24 @@
     const coordsEl = document.getElementById('cpm-coords');
     coordsEl.textContent = 'Your coordinates (prototype): X = ' + x.toFixed(1) + ', Y = ' + y.toFixed(1);
 
+    // Find nearest reference point (roughly)
+    let nearest = null;
+    let bestDist = Infinity;
+    CPM_REFERENCE_POINTS.forEach(ref => {
+      const dx = ref.x - x;
+      const dy = ref.y - y;
+      const dist2 = dx*dx + dy*dy;
+      if (dist2 < bestDist) {
+        bestDist = dist2;
+        nearest = ref;
+      }
+    });
+    const nearestEl = document.getElementById('cpm-nearest');
+    if (nearest && nearestEl) {
+      nearestEl.textContent = 'Closest tradition on this map (very roughly): ' +
+        nearest.label + ' (' + nearest.group + ').';
+    }
+
     const ctx = document.getElementById('cpm-chart').getContext('2d');
     if (cpmChart) cpmChart.destroy();
 
@@ -332,19 +460,26 @@
         data: [{ x: x, y: y }],
         pointRadius: 7,
         pointHoverRadius: 9,
-        backgroundColor: 'rgba(0, 0, 0, 0.9)'
+        backgroundColor: 'rgba(0, 0, 0, 0.9)',
+        borderColor: 'rgba(0,0,0,1)',
+        borderWidth: 2,
+        pointStyle: 'circle'
       }
     ];
 
-    // One dataset per tradition, coloured by cluster
+    // One dataset per tradition, coloured by cluster and given a shape
     CPM_REFERENCE_POINTS.forEach(ref => {
       const color = CPM_GROUP_COLORS[ref.group] || 'rgba(160, 160, 160, 0.9)';
+      const style = CPM_POINT_STYLES[ref.label] || 'circle';
       datasets.push({
         label: ref.label,
         data: [{ x: ref.x, y: ref.y, label: ref.label }],
-        pointRadius: 4,
-        pointHoverRadius: 6,
-        backgroundColor: color
+        pointRadius: 5,
+        pointHoverRadius: 7,
+        backgroundColor: color,
+        borderColor: 'rgba(0, 0, 0, 0.7)',
+        borderWidth: 1,
+        pointStyle: style
       });
     });
 
