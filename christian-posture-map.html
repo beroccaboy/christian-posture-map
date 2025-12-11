@@ -212,7 +212,11 @@
   <!-- STEP 5: Results -->
   <div class="cpm-step" data-step="5" style="display:none;">
     <h2>Your Christian Posture Map</h2>
-    <p>This is a prototype using four questions. Treat it as a rough orientation, not a verdict.</p>
+    <p>
+      This is a prototype using four questions. Treat it as a rough orientation, not a verdict.
+      The map also shows approximate positions of some common Christian traditions and sub-traditions
+      for comparison.
+    </p>
 
     <div id="cpm-chart-wrapper">
       <canvas id="cpm-chart"></canvas>
@@ -232,6 +236,26 @@
 <script>
   let cpmCurrentStep = 0;
   let cpmChart = null;
+
+  // Approximate locations of denominational clusters
+  const CPM_REFERENCE_POINTS = [
+    { label: 'Baptist (typical)', x: -4, y: 3 },
+    { label: 'Non-denominational Evangelical', x: -4, y: 2 },
+    { label: 'Reformed / Presbyterian', x: -3, y: 2 },
+    { label: 'Pentecostal / Charismatic', x: -2, y: 1 },
+    { label: 'Lutheran (confessional)', x: -1, y: 0 },
+    { label: 'Methodist / Wesleyan', x: -1, y: -1 },
+
+    { label: 'Anglican – Evangelical', x: 0, y: 1 },
+    { label: 'Anglican – Broad', x: 2, y: -0.5 },
+    { label: 'Anglican – Anglo-Catholic', x: 4, y: -3 },
+
+    { label: 'Catholic – Typical Parish', x: 6, y: -4 },
+    { label: 'Catholic – Traditionalist', x: 7, y: -5 },
+    { label: 'Catholic – Progressive', x: 5, y: -3 },
+
+    { label: 'Eastern Orthodox', x: 8, y: -5 }
+  ];
 
   function cpmShowStep(step) {
     const steps = document.querySelectorAll('#cpm-app .cpm-step');
@@ -290,15 +314,29 @@
     const ctx = document.getElementById('cpm-chart').getContext('2d');
     if (cpmChart) cpmChart.destroy();
 
+    // Build datasets: first "You", then fixed reference points
+    const datasets = [
+      {
+        label: 'You',
+        data: [{ x: x, y: y }],
+        pointRadius: 7,
+        pointHoverRadius: 9,
+        backgroundColor: 'rgba(0,0,0,0.9)'
+      }
+    ];
+
+    CPM_REFERENCE_POINTS.forEach(ref => {
+      datasets.push({
+        label: ref.label,
+        data: [{ x: ref.x, y: ref.y }],
+        pointRadius: 4,
+        pointHoverRadius: 6
+      });
+    });
+
     cpmChart = new Chart(ctx, {
       type: 'scatter',
-      data: {
-        datasets: [{
-          label: 'You',
-          data: [{ x: x, y: y }],
-          pointRadius: 6
-        }]
-      },
+      data: { datasets: datasets },
       options: {
         responsive: true,
         maintainAspectRatio: false,
@@ -318,7 +356,13 @@
             grid: { color:'#eee' }
           }
         },
-        plugins: { legend: { display:false } }
+        plugins: {
+          legend: {
+            display: true,
+            position: 'right',
+            labels: { boxWidth: 12 }
+          }
+        }
       }
     });
   }
