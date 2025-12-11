@@ -239,44 +239,42 @@
   let cpmCurrentStep = 0;
   let cpmChart = null;
 
-  function cpmUpdateProgress(step) {
-    const el = document.getElementById('cpm-progress');
-    if (!el) return;
-    if (step >= 1 && step <= 4) {
-      el.textContent = 'Question ' + step + ' of 4';
-    } else {
-      el.textContent = '';
-    }
-  }
-
   // Approximate locations of denominational clusters
   const CPM_REFERENCE_POINTS = [
-    { label: 'Baptist (typical)', x: -4, y: 3 },
-    { label: 'Non-denominational Evangelical', x: -4, y: 2 },
-    { label: 'Reformed / Presbyterian', x: -3, y: 2 },
-    { label: 'Pentecostal / Charismatic', x: -2, y: 1 },
-    { label: 'Lutheran (confessional)', x: -1, y: 0 },
-    { label: 'Methodist / Wesleyan', x: -1, y: -1 },
+    { label: 'Baptist (typical)', x: -4, y: 3, group: 'Evangelical / Low-church' },
+    { label: 'Non-denominational Evangelical', x: -4, y: 2, group: 'Evangelical / Low-church' },
+    { label: 'Reformed / Presbyterian', x: -3, y: 2, group: 'Evangelical / Low-church' },
+    { label: 'Pentecostal / Charismatic', x: -2, y: 1, group: 'Evangelical / Low-church' },
 
-    { label: 'Anglican – Evangelical', x: 0, y: 1 },
-    { label: 'Anglican – Broad', x: 2, y: -0.5 },
-    { label: 'Anglican – Anglo-Catholic', x: 4, y: -3 },
+    { label: 'Lutheran (confessional)', x: -1, y: 0, group: 'Magisterial Protestant' },
+    { label: 'Methodist / Wesleyan', x: -1, y: -1, group: 'Magisterial Protestant' },
 
-    { label: 'Catholic – Typical Parish', x: 6, y: -4 },
-    { label: 'Catholic – Traditionalist', x: 7, y: -5 },
-    { label: 'Catholic – Progressive', x: 5, y: -3 },
+    { label: 'Anglican – Evangelical', x: 0, y: 1, group: 'Anglican' },
+    { label: 'Anglican – Broad', x: 2, y: -0.5, group: 'Anglican' },
+    { label: 'Anglican – Anglo-Catholic', x: 4, y: -3, group: 'Anglican' },
 
-    { label: 'Eastern Orthodox', x: 8, y: -5 }
+    { label: 'Catholic – Typical Parish', x: 6, y: -4, group: 'Catholic / Orthodox' },
+    { label: 'Catholic – Traditionalist', x: 7, y: -5, group: 'Catholic / Orthodox' },
+    { label: 'Catholic – Progressive', x: 5, y: -3, group: 'Catholic / Orthodox' },
+
+    { label: 'Eastern Orthodox', x: 8, y: -5, group: 'Catholic / Orthodox' }
   ];
+
+  // Colours per cluster
+  const CPM_GROUP_COLORS = {
+    'Evangelical / Low-church': 'rgba(54, 162, 235, 0.9)',       // blue
+    'Magisterial Protestant':   'rgba(75, 192, 192, 0.9)',       // teal
+    'Anglican':                 'rgba(255, 159, 64, 0.9)',       // orange
+    'Catholic / Orthodox':      'rgba(153, 102, 255, 0.9)'       // purple
+  };
 
   function cpmShowStep(step) {
     const steps = document.querySelectorAll('#cpm-app .cpm-step');
     steps.forEach(s => s.style.display = 'none');
     const target = document.querySelector('#cpm-app .cpm-step[data-step="' + step + '"]');
-     if (target) {
+    if (target) {
       target.style.display = 'block';
       cpmCurrentStep = step;
-      cpmUpdateProgress(step);
     }
   }
 
@@ -323,28 +321,30 @@
 
     const coordsEl = document.getElementById('cpm-coords');
     coordsEl.textContent = 'Your coordinates (prototype): X = ' + x.toFixed(1) + ', Y = ' + y.toFixed(1);
-    cpmDescribeNearest(x, y);
 
     const ctx = document.getElementById('cpm-chart').getContext('2d');
     if (cpmChart) cpmChart.destroy();
 
-    // Build datasets: first "You", then fixed reference points
+    // You dataset
     const datasets = [
       {
         label: 'You',
         data: [{ x: x, y: y }],
         pointRadius: 7,
         pointHoverRadius: 9,
-        backgroundColor: 'rgba(0,0,0,0.9)'
+        backgroundColor: 'rgba(0, 0, 0, 0.9)'
       }
     ];
 
+    // One dataset per tradition, coloured by cluster
     CPM_REFERENCE_POINTS.forEach(ref => {
+      const color = CPM_GROUP_COLORS[ref.group] || 'rgba(160, 160, 160, 0.9)';
       datasets.push({
         label: ref.label,
-        data: [{ x: ref.x, y: ref.y }],
+        data: [{ x: ref.x, y: ref.y, label: ref.label }],
         pointRadius: 4,
-        pointHoverRadius: 6
+        pointHoverRadius: 6,
+        backgroundColor: color
       });
     });
 
@@ -361,13 +361,13 @@
             min: -10,
             max: 10,
             title: { display: true, text: 'Authority & Continuity' },
-            grid: { color:'#eee' }
+            grid: { color: '#eee' }
           },
           y: {
             min: -10,
             max: 10,
             title: { display: true, text: 'Grace & Participation' },
-            grid: { color:'#eee' }
+            grid: { color: '#eee' }
           }
         },
         plugins: {
@@ -375,6 +375,17 @@
             display: true,
             position: 'right',
             labels: { boxWidth: 12 }
+          },
+          tooltip: {
+            callbacks: {
+              label: function (ctx) {
+                const raw = ctx.raw || {};
+                if (raw.label) {
+                  return raw.label + ' (X ' + raw.x + ', Y ' + raw.y + ')';
+                }
+                return 'You (X ' + ctx.parsed.x + ', Y ' + ctx.parsed.y + ')';
+              }
+            }
           }
         }
       }
@@ -385,24 +396,6 @@
     const radios = document.querySelectorAll('#cpm-app input[type="radio"]');
     radios.forEach(r => r.checked = false);
     cpmShowStep(0);
-  }
-
-  function cpmDescribeNearest(x, y) {
-    const nearestEl = document.getElementById('cpm-nearest');
-    if (!nearestEl || !Array.isArray(CPM_REFERENCE_POINTS)) return;
-
-    const sorted = CPM_REFERENCE_POINTS
-      .map(p => ({
-        label: p.label,
-        dist: Math.sqrt(Math.pow(p.x - x, 2) + Math.pow(p.y - y, 2))
-      }))
-      .sort((a, b) => a.dist - b.dist);
-
-    const top = sorted.slice(0, 3);
-
-    nearestEl.textContent =
-      'Closest reference traditions (for orientation, not a verdict): ' +
-      top.map(t => t.label).join(' · ');
   }
 
   document.addEventListener('DOMContentLoaded', function () {
