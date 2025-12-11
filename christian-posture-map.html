@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Christian Posture Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Basic styling – you can tweak later -->
+  <style>
+    :root {
+      --primary:#222;
+      --secondary:#f5f5f5;
+      --text:#222;
+      --muted:#555;
+      --border:#ddd;
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0;
+      padding:1.5rem;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background:#fff;
+    }
+    #cpm-app {
+      max-width:800px;
+      margin:0 auto;
+    }
+    #cpm-app h1 { font-weight:600; font-size:1.8rem; margin-bottom:0.75rem; }
+    #cpm-app h2 { font-weight:600; font-size:1.3rem; margin:1rem 0 0.5rem; }
+    #cpm-app p { line-height:1.5; }
+    #cpm-app ul { padding-left:1.2rem; }
+    .cpm-step { margin-top:1rem; }
+    .cpm-option { display:block; margin:0.45rem 0; }
+    .cpm-option input { margin-right:0.5rem; }
+    .cpm-nav { margin-top:1.2rem; display:flex; gap:0.5rem; }
+    .cpm-btn {
+      padding:0.5rem 1.1rem;
+      border-radius:4px;
+      border:1px solid var(--primary);
+      background:var(--primary);
+      color:#fff;
+      cursor:pointer;
+      font-size:0.95rem;
+    }
+    .cpm-btn-secondary {
+      background:var(--secondary);
+      color:var(--primary);
+    }
+    .cpm-helper {
+      font-size:0.9rem;
+      color:var(--muted);
+      margin-top:0.5rem;
+    }
+    #cpm-chart-wrapper {
+      position:relative;
+      width:100%;
+      height:400px;
+      border:1px solid var(--border);
+      border-radius:4px;
+      padding:0.5rem;
+    }
+    @media (max-width:600px) {
+      body { padding:1rem; }
+      #cpm-chart-wrapper { height:320px; }
+    }
+  </style>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div id="cpm-app">
+  <h1>Christian Posture Map</h1>
+
+  <!-- STEP 0: Intro -->
+  <div class="cpm-step" data-step="0">
+    <p>
+      This tool maps your answers onto a simple two-axis chart, based on two big instincts in Christian theology:
+    </p>
+    <ul>
+      <li><strong>Authority &amp; Continuity (X-axis)</strong> – how much weight you give to Scripture alone versus Scripture within the Church’s ongoing teaching.</li>
+      <li><strong>Grace &amp; Participation (Y-axis)</strong> – how you understand faith, works, sacraments, and human cooperation with grace.</li>
+    </ul>
+    <p>
+      Different Christians read the same passages with different emphases. This doesn’t judge who is right; it simply shows where your own interpretive posture tends to sit.
+    </p>
+    <p class="cpm-helper">
+      This prototype has four questions. Later it can be expanded.
+    </p>
+    <button type="button" onclick="cpmNextStep()" class="cpm-btn">Start</button>
+  </div>
+
+  <!-- STEP 1: Tradition / Scripture -->
+  <div class="cpm-step" data-step="1" style="display:none;">
+    <h2>1. Apostolic Tradition</h2>
+    <p><em>“So then, brothers and sisters, stand firm and hold to the traditions that you were taught by us, either by word of mouth or by letter.”</em> (2 Thessalonians 2:15)</p>
+    <p>How do you read this?</p>
+
+    <label class="cpm-option">
+      <input type="radio" name="q1" data-dx="-3" data-dy="0">
+      The “traditions” were temporary; now everything binding is in Scripture alone.
+    </label>
+    <label class="cpm-option">
+      <input type="radio" name="q1" data-dx="-1" data-dy="0">
+      It acknowledged oral teaching then, but today in practice Scripture is sufficient by itself.
+    </label>
+    <label class="cpm-option">
+      <input type="radio" name="q1" data-dx="2" data-dy="0">
+      It shows a pattern: Scripture is primary, but the Church’s received teaching still matters.
+    </label>
+    <label class="cpm-option">
+      <input type="radio" name="q1" data-dx="3" data-dy="0">
+      It supports an ongoing authoritative tradition alongside Scripture.
+    </label>
+
+    <div class="cpm-nav">
+      <button type="button" onclick="cpmPrevStep()" class="cpm-btn cpm-btn-secondary">Back</button>
+      <button type="button" onclick="cpmNextStep()" class="cpm-btn">Next</button>
+    </div>
+  </div>
+
+  <!-- STEP 2: Faith & Works -->
+  <div class="cpm-step" data-step="2" style="display:none;">
+    <h2>2. Faith and Works</h2>
+    <p><em>“For we hold that a person is justified by faith apart from works of the law.”</em> (Romans 3:28)</p>
+    <p><em>“You see that a person is justified by works and not by faith alone.”</em> (James 2:24)</p>
+    <p>Holding these together, which statement fits you best?</p>
+
+    <label class="cpm-option">
+      <input type="radio" name="q2" data-dx="0" data-dy="3">
+      We are justified by faith alone; works only prove faith is real and play no role in justification.
+    </label>
+    <label class="cpm-option">
+      <input type="radio" name="q2" data-dx="0" data-dy="1">
+      Faith alone justifies, but real faith inevitably produces a life of obedience.
+    </label>
+    <label class="cpm-option">
+      <input type="radio" name="q2" data-dx="0" data-dy="-1">
+      Faith and obedience belong together; justification language is more complex than a slogan.
+    </label>
+    <label class="cpm-option">
+      <input type="radio" name="q2" data-dx="0" data-dy="-3">
+      Salvation is a cooperative process: faith, works, and sacraments all participate in grace.
+    </label>
+
+    <div class="cpm-nav">
+      <button type="button" onclick="cpmPrevStep()" class="cpm-btn cpm-btn-secondary">Back</button>
+      <button type="button" onclick="cpmNextStep()" class="cpm-btn">Next</button>
+    </div>
+  </div>
+
+  <!-- STEP 3: Baptism -->
+  <div class="cpm-step" data-step="3" style="display:none;">
+    <h2>3. Baptism</h2>
+    <p><em>“Repent and be baptised every one of you in the name of Jesus Christ for the forgiveness of your sins…”</em> (Acts 2:38)</p>
+    <p><em>“Baptism… now saves you…”</em> (1 Peter 3:21)</p>
+    <p>What do you think baptism does?</p>
+
+    <label class="cpm-option">
+      <input type="radio" name="q3" data-dx="-1" data-dy="3">
+      A public symbol of a salvation that has already happened by faith alone.
+    </label>
+    <label class="cpm-option">
+      <input type="radio" name="q3" data-dx="1" data-dy="1">
+      A commanded sign marking entry into the visible Church; God saves independently of it.
+    </label>
+    <label class="cpm-option">
+      <input type="radio" name="q3" data-dx="2" data-dy="-1">
+      A normal means by which God gives or seals grace, even if God is not boxed in by it.
+    </label>
+    <label class="cpm-option">
+      <input type="radio" name="q3" data-dx="3" data-dy="-3">
+      A true sacrament: God actually works salvationally through it when the Church baptises.
+    </label>
+
+    <div class="cpm-nav">
+      <button type="button" onclick="cpmPrevStep()" class="cpm-btn cpm-btn-secondary">Back</button>
+      <button type="button" onclick="cpmNextStep()" class="cpm-btn">Next</button>
+    </div>
+  </div>
+
+  <!-- STEP 4: Eucharist -->
+  <div class="cpm-step" data-step="4" style="display:none;">
+    <h2>4. Communion / The Lord’s Supper</h2>
+    <p><em>“This is my body… this is my blood…”</em> (Matthew 26:26–28)</p>
+    <p>What is happening at Communion?</p>
+
+    <label class="cpm-option">
+      <input type="radio" name="q4" data-dx="-2" data-dy="2">
+      A symbolic memorial only; Christ is present in our faith and memory, not in the elements.
+    </label>
+    <label class="cpm-option">
+      <input type="radio" name="q4" data-dx="1" data-dy="0">
+      Christ is really present spiritually; the Supper strengthens faith but doesn’t itself convey grace.
+    </label>
+    <label class="cpm-option">
+      <input type="radio" name="q4" data-dx="2" data-dy="-1">
+      Christ is really present in a way we don’t fully define; the Eucharist is a key means of grace.
+    </label>
+    <label class="cpm-option">
+      <input type="radio" name="q4" data-dx="3" data-dy="-2">
+      The bread and wine truly become Christ’s body and blood; the Eucharist is central to salvation life.
+    </label>
+
+    <div class="cpm-nav">
+      <button type="button" onclick="cpmPrevStep()" class="cpm-btn cpm-btn-secondary">Back</button>
+      <button type="button" onclick="cpmShowResults()" class="cpm-btn">See My Map</button>
+    </div>
+  </div>
+
+  <!-- STEP 5: Results -->
+  <div class="cpm-step" data-step="5" style="display:none;">
+    <h2>Your Christian Posture Map</h2>
+    <p>This is a prototype using four questions. Treat it as a rough orientation, not a verdict.</p>
+
+    <div id="cpm-chart-wrapper">
+      <canvas id="cpm-chart"></canvas>
+    </div>
+
+    <p id="cpm-coords" class="cpm-helper"></p>
+
+    <p class="cpm-helper">
+      X-axis: Authority &amp; Continuity (left = Scripture-alone emphasis, right = Scripture-within-tradition).<br>
+      Y-axis: Grace &amp; Participation (up = faith-alone abstraction, down = cooperative / sacramental grace).
+    </p>
+
+    <button type="button" onclick="cpmRestart()" class="cpm-btn cpm-btn-secondary">Start Again</button>
+  </div>
+</div>
+
+<script>
+  let cpmCurrentStep = 0;
+  let cpmChart = null;
+
+  function cpmShowStep(step) {
+    const steps = document.querySelectorAll('#cpm-app .cpm-step');
+    steps.forEach(s => s.style.display = 'none');
+    const target = document.querySelector('#cpm-app .cpm-step[data-step="' + step + '"]');
+    if (target) {
+      target.style.display = 'block';
+      cpmCurrentStep = step;
+    }
+  }
+
+  function cpmNextStep() {
+    // validate radios on steps 1–4
+    if (cpmCurrentStep > 0 && cpmCurrentStep < 5) {
+      const stepDiv = document.querySelector('#cpm-app .cpm-step[data-step="' + cpmCurrentStep + '"]');
+      const radios = stepDiv.querySelectorAll('input[type="radio"]');
+      const anyChecked = Array.from(radios).some(r => r.checked);
+      if (!anyChecked) {
+        alert('Please choose an option before continuing.');
+        return;
+      }
+    }
+    cpmShowStep(cpmCurrentStep + 1);
+  }
+
+  function cpmPrevStep() {
+    if (cpmCurrentStep > 0) {
+      cpmShowStep(cpmCurrentStep - 1);
+    }
+  }
+
+  function cpmShowResults() {
+    // validate last step
+    const stepDiv = document.querySelector('#cpm-app .cpm-step[data-step="' + cpmCurrentStep + '"]');
+    const radios = stepDiv.querySelectorAll('input[type="radio"]');
+    const anyChecked = Array.from(radios).some(r => r.checked);
+    if (!anyChecked) {
+      alert('Please choose an option before continuing.');
+      return;
+    }
+
+    let x = 0, y = 0;
+    const allChecked = document.querySelectorAll('#cpm-app input[type="radio"]:checked');
+    allChecked.forEach(r => {
+      const dx = parseFloat(r.getAttribute('data-dx')) || 0;
+      const dy = parseFloat(r.getAttribute('data-dy')) || 0;
+      x += dx;
+      y += dy;
+    });
+
+    cpmShowStep(5);
+
+    const coordsEl = document.getElementById('cpm-coords');
+    coordsEl.textContent = 'Your coordinates (prototype): X = ' + x.toFixed(1) + ', Y = ' + y.toFixed(1);
+
+    const ctx = document.getElementById('cpm-chart').getContext('2d');
+    if (cpmChart) cpmChart.destroy();
+
+    cpmChart = new Chart(ctx, {
+      type: 'scatter',
+      data: {
+        datasets: [{
+          label: 'You',
+          data: [{ x: x, y: y }],
+          pointRadius: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            type: 'linear',
+            position: 'bottom',
+            min: -10,
+            max: 10,
+            title: { display: true, text: 'Authority & Continuity' },
+            grid: { color:'#eee' }
+          },
+          y: {
+            min: -10,
+            max: 10,
+            title: { display: true, text: 'Grace & Participation' },
+            grid: { color:'#eee' }
+          }
+        },
+        plugins: { legend: { display:false } }
+      }
+    });
+  }
+
+  function cpmRestart() {
+    const radios = document.querySelectorAll('#cpm-app input[type="radio"]');
+    radios.forEach(r => r.checked = false);
+    cpmShowStep(0);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    cpmShowStep(0);
+  });
+</script>
+</body>
+</html>
