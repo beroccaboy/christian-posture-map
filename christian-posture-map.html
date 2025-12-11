@@ -72,6 +72,7 @@
 <body>
 <div id="cpm-app">
   <h1>Christian Posture Map</h1>
+  <div id="cpm-progress" class="cpm-helper"></div>
 
   <!-- STEP 0: Intro -->
   <div class="cpm-step" data-step="0">
@@ -223,6 +224,7 @@
     </div>
 
     <p id="cpm-coords" class="cpm-helper"></p>
+    <p id="cpm-nearest" class="cpm-helper"></p>
 
     <p class="cpm-helper">
       X-axis: Authority &amp; Continuity (left = Scripture-alone emphasis, right = Scripture-within-tradition).<br>
@@ -236,6 +238,16 @@
 <script>
   let cpmCurrentStep = 0;
   let cpmChart = null;
+
+  function cpmUpdateProgress(step) {
+    const el = document.getElementById('cpm-progress');
+    if (!el) return;
+    if (step >= 1 && step <= 4) {
+      el.textContent = 'Question ' + step + ' of 4';
+    } else {
+      el.textContent = '';
+    }
+  }
 
   // Approximate locations of denominational clusters
   const CPM_REFERENCE_POINTS = [
@@ -261,9 +273,10 @@
     const steps = document.querySelectorAll('#cpm-app .cpm-step');
     steps.forEach(s => s.style.display = 'none');
     const target = document.querySelector('#cpm-app .cpm-step[data-step="' + step + '"]');
-    if (target) {
+     if (target) {
       target.style.display = 'block';
       cpmCurrentStep = step;
+      cpmUpdateProgress(step);
     }
   }
 
@@ -310,6 +323,7 @@
 
     const coordsEl = document.getElementById('cpm-coords');
     coordsEl.textContent = 'Your coordinates (prototype): X = ' + x.toFixed(1) + ', Y = ' + y.toFixed(1);
+    cpmDescribeNearest(x, y);
 
     const ctx = document.getElementById('cpm-chart').getContext('2d');
     if (cpmChart) cpmChart.destroy();
@@ -371,6 +385,24 @@
     const radios = document.querySelectorAll('#cpm-app input[type="radio"]');
     radios.forEach(r => r.checked = false);
     cpmShowStep(0);
+  }
+
+  function cpmDescribeNearest(x, y) {
+    const nearestEl = document.getElementById('cpm-nearest');
+    if (!nearestEl || !Array.isArray(CPM_REFERENCE_POINTS)) return;
+
+    const sorted = CPM_REFERENCE_POINTS
+      .map(p => ({
+        label: p.label,
+        dist: Math.sqrt(Math.pow(p.x - x, 2) + Math.pow(p.y - y, 2))
+      }))
+      .sort((a, b) => a.dist - b.dist);
+
+    const top = sorted.slice(0, 3);
+
+    nearestEl.textContent =
+      'Closest reference traditions (for orientation, not a verdict): ' +
+      top.map(t => t.label).join(' · ');
   }
 
   document.addEventListener('DOMContentLoaded', function () {
